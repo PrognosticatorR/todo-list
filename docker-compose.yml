@@ -10,6 +10,8 @@ services:
          - /data/db
          - /data/configdb
       restart: always
+      logging:
+         driver: none
    frontend:
       container_name: todos-client
       build:
