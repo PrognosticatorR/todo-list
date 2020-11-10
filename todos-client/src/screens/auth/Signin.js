@@ -60,14 +60,14 @@ export default function SignInComponent() {
          password,
       },
       onSuccess: () => {
+         setAuthenticated(true);
          history.push("/", authenticated);
       },
    });
 
    const handleSubmit = async event => {
       event.preventDefault();
-      let res = await doRequest();
-      console.log(res);
+      await doRequest();
    };
    // const handleSubmit = async e => {
    //    e.preventDefault();

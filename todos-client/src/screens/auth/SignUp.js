@@ -45,7 +45,7 @@ export default function SignUp() {
          email,
          password,
       },
-      onSuccess: () => history.push("/todos"),
+      onSuccess: () => history.push("/"),
    });
 
    const handleSubmit = async event => {

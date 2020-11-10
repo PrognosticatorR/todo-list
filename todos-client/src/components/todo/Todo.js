@@ -9,7 +9,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import EditTodoForm from "./EditTodoForm";
 
-function Todo({ id, task, completed, removeTodo, toggleTodo, editTodo }) {
+function Todo({ id, description, status, removeTodo, toggleTodo, editTodo }) {
    const [isEditing, toggle] = useState(false);
 
    return (
@@ -18,19 +18,21 @@ function Todo({ id, task, completed, removeTodo, toggleTodo, editTodo }) {
             <EditTodoForm
                editTodo={editTodo}
                id={id}
-               task={task}
+               task={description}
                toggleEditForm={toggle}
             />
          ) : (
             <>
                <Checkbox
                   tabIndex={-1}
-                  checked={completed}
+                  checked={status === "completed"}
                   onClick={() => toggleTodo(id)}
                />
                <ListItemText
-                  style={{ textDecoration: completed ? "line-through" : "none" }}>
-                  {task}
+                  style={{
+                     textDecoration: status === "completed" ? "line-through" : "none",
+                  }}>
+                  {description}
                </ListItemText>
                <ListItemSecondaryAction>
                   <IconButton aria-label='Delete' onClick={() => removeTodo(id)}>

@@ -1,22 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TodoList from "../../components/todo/TodoList";
 import TodoForm from "../../components/todo/TodoForm";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../../components/Layout";
-import useTodoState from "../../hooks/useTodoState";
 import { getAlltasks } from "../../actions/todos";
+import { addTask, deleteTask, updateTask, toggleStatus } from "../../actions/todos";
 
 function TodoApp() {
+   const [todolist, setTodolist] = useState([]);
+   const [success, setSuccess] = useState(false);
    useEffect(() => {
-      getAlltasks();
-   }, []);
+      getAlltasks().then(data => setTodolist(data));
+   }, [success]);
+   // const { toggleTodo } = useTodoState(initialTodos);
 
-   const initialTodos = [{ id: 1, task: "Walk The Goldfish", completed: true }];
-
-   const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
-      initialTodos
-   );
+   const addTodo = val => {
+      addTask(val).then(() => setSuccess(!success));
+   };
+   const removeTodo = id => {
+      deleteTask(id).then(() => setSuccess(!success));
+   };
+   const editTodo = (id, description) => {
+      updateTask(id, description).then(() => setSuccess(!success));
+   };
+   const toggleTodo = (id, status) => {
+      toggleStatus(id, status).then(() => setSuccess(!success));
+   };
 
    return (
       <Layout>
@@ -32,7 +42,7 @@ function TodoApp() {
                <Grid item xs={11} md={8} lg={4}>
                   <TodoForm addTodo={addTodo} />
                   <TodoList
-                     todos={todos}
+                     todos={todolist}
                      removeTodo={removeTodo}
                      toggleTodo={toggleTodo}
                      editTodo={editTodo}
