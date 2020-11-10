@@ -5,6 +5,7 @@ const Password = require("../services/password");
 
 exports.signup = async (req, res) => {
    const { email, password } = req.body;
+   console.log(email, password);
    const existingUser = await User.findOne({ email });
    if (existingUser) {
       throw new BadRequestError("Email is in use!");

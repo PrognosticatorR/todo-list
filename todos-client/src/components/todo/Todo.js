@@ -8,7 +8,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import EditTodoForm from "./EditTodoForm";
-import useRequest from "../../hooks/useRequest";
 
 function Todo({ id, task, completed, removeTodo, toggleTodo, editTodo }) {
    const [isEditing, toggle] = useState(false);

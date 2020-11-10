@@ -8,18 +8,15 @@ const useRequest = ({ url, method, body, onSuccess }) => {
       try {
          setErrors(null);
          const response = await axios[method](url, body);
-
          if (onSuccess) {
             onSuccess(response.data);
          }
          return response.data;
       } catch (err) {
-         console.log(err);
          setErrors(err);
       }
    };
-
-   return { doRequest, errors };
+   return { doRequest, errors: errors };
 };
 
 export default useRequest;
