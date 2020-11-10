@@ -51,7 +51,6 @@ export default function SignInComponent() {
       }
    };
 
-   const [authenticated, setAuthenticated] = useState(false);
    const { doRequest, errors } = useRequest({
       url: "/users/signin",
       method: "post",
@@ -60,8 +59,7 @@ export default function SignInComponent() {
          password,
       },
       onSuccess: () => {
-         setAuthenticated(true);
-         history.push("/", authenticated);
+         history.push("/");
       },
    });
 

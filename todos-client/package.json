@@ -17,7 +17,7 @@
       "uuid": "^8.3.1",
       "web-vitals": "^0.2.4"
    },
-   "proxy": "http://localhost:6555/api",
+   "proxy": "http://backend:8000/api",
    "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build",
