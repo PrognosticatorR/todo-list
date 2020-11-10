@@ -5,7 +5,6 @@ const Task = require("../models/Task");
 
 exports.createtask = async (req, res) => {
    const { description } = req.body;
-   console.log(req.currentUser);
    const task = new Task({
       description,
       userId: req.currentUser.id,

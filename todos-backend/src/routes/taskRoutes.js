@@ -41,7 +41,7 @@ router.put(
 );
 
 router.patch(
-   "/markcomplete/:id",
+   "/toggle/:id",
    [
       body("status")
          .isIn(Object.values(StatusTypes))
