@@ -7,7 +7,10 @@
    "scripts": {
       "dev": "nodemon index.js",
       "start": "node index.js",
-      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../frontend && npm run build --prefix ../frontend"
+      "server": "nodemon index.js",
+      "client": "npm start --prefix ../todos-client",
+      "runProject": "concurrently \"npm run server\" \"npm run client\"",
+      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../todos-client && npm run build --prefix ../todos-client"
    },
    "repository": {
       "type": "git",
@@ -36,6 +39,7 @@
       "morgan": "^1.10.0"
    },
    "devDependencies": {
+      "concurrently": "^5.3.0",
       "nodemon": "^2.0.6"
    }
 }
