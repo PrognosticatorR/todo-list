@@ -9,13 +9,13 @@ const start = async () => {
       throw new Error("Mongo uri must be defined.");
    }
    try {
-      await mongoose.connect(process.env.MONGO_URI, {
+      await mongoose.connect(process.env.MONGO_ATLAS, {
          useNewUrlParser: true,
          useUnifiedTopology: true,
          useCreateIndex: true,
          useFindAndModify: false,
       });
-      console.log("connected to mongodb..");
+      console.log("connected to mongodb..", process.env.MONGO_ATLAS);
    } catch (error) {
       console.error(error);
    }

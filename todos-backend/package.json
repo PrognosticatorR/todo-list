@@ -3,9 +3,11 @@
    "version": "1.0.0",
    "description": "to do list project",
    "main": "index.js",
+   "author": "Devesh Rawat",
    "scripts": {
       "dev": "nodemon index.js",
-      "start": "node index.js"
+      "start": "node index.js",
+      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../frontend && npm run build --prefix ../frontend"
    },
    "repository": {
       "type": "git",
@@ -14,7 +16,6 @@
    "keywords": [
       "todo-list"
    ],
-   "author": "devesh rawat",
    "license": "ISC",
    "bugs": {
       "url": "https://github.com/deveshrawat/todo-list/issues"
