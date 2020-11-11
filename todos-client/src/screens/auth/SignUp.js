@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,8 +14,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
+import { getCurrentUser } from "../../actions/auth";
 
 import Layout from "../../components/Layout";
 import useRequest from "../../hooks/useRequest";
@@ -51,8 +52,21 @@ export default function SignUp() {
          email,
          password,
       },
-      onSuccess: () => history.push("/"),
+      onSuccess: () => {
+         window.location.reload();
+         <Redirect to='/' />;
+      },
    });
+
+   useEffect(() => {
+      getCurrentUser().then(data => {
+         if (data) {
+            history.push("/");
+         }
+         console.log(data);
+      });
+   }, [history]);
+
    const handleSubmit = async event => {
       event.preventDefault();
       await doRequest();

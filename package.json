@@ -6,7 +6,7 @@
    "author": "Devesh Rawat",
    "scripts": {
       "dev": "nodemon todos-backend/index.js",
-      "start": "node  todos-backend/index.js",
+      "start": "node todos-backend/index.js",
       "server": "nodemon todos-backend/index.js",
       "client": "npm start --prefix todos-client",
       "runProject": "concurrently \"npm run server\" \"npm run client\"",

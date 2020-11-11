@@ -9,14 +9,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
    return (
-      <Router>
-         <React.Fragment>
+      <React.Fragment>
+         <Router>
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/signout' component={SignOut} />
             <PrivateRoute exact path='/' component={TodoApp} />
-         </React.Fragment>
-      </Router>
+         </Router>
+      </React.Fragment>
    );
 }
 
