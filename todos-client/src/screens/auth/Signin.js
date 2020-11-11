@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -16,11 +16,12 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 
 import useRequest from "../../hooks/useRequest";
 import Layout from "../../components/Layout";
+import { getCurrentUser } from "../../actions/auth";
 
 const useStyles = makeStyles(theme => ({
    paper: {
@@ -63,9 +64,19 @@ export default function SignInComponent() {
          password,
       },
       onSuccess: () => {
-         history.push("/");
+         window.location.reload();
+         <Redirect to='/' />;
       },
    });
+   useEffect(() => {
+      getCurrentUser().then(data => {
+         if (data) {
+            history.push("/");
+         }
+         console.log(data);
+      });
+   }, [history]);
+
    const showErrors = () => {
       return errors.errors.map(err => <Alert color='error'>{err.message} </Alert>);
    };

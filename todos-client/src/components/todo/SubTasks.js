@@ -5,20 +5,10 @@ import Divider from "@material-ui/core/Divider";
 import keyGenerator from "../../utils/keyGenerator";
 import SubTask from "./subTask";
 import AddSubTask from "./AddSubTask";
-import {
-   addSubTask,
-   deleteSubTask,
-   toggleSubTaskStatus,
-   getSubTaks,
-} from "../../actions/subTasks";
+import { addSubTask, deleteSubTask, toggleSubTaskStatus } from "../../actions/subTasks";
 
 function SubTasks({ editTodo, show, taskId, subtasks }) {
    const [subtasksList, setSubtasksList] = useState(subtasks);
-
-   // useEffect(() => {
-   //    setSubtasksList(subtasks);
-   //    console.log(subtasks);
-   // }, [subtasks]);
 
    const addSubTodo = description => {
       addSubTask(taskId, description).then(data => {

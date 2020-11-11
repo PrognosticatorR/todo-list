@@ -51,7 +51,7 @@ export default function ButtonAppBar() {
          <AppBar position='static'>
             <Toolbar>
                <Typography variant='h6' className={classes.title}>
-                  <Link className={classes.link} hreh='/'>
+                  <Link className={classes.link} to='/'>
                      Todo-App
                   </Link>
                </Typography>
