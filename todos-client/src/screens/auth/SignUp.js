@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormGroup from "@material-ui/core/FormGroup";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -10,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 import Layout from "../../components/Layout";
 import useRequest from "../../hooks/useRequest";
@@ -47,7 +53,6 @@ export default function SignUp() {
       },
       onSuccess: () => history.push("/"),
    });
-
    const handleSubmit = async event => {
       event.preventDefault();
       await doRequest();
@@ -60,7 +65,9 @@ export default function SignUp() {
          setPassword(value);
       }
    };
-
+   const showErrors = () => {
+      return errors.errors.map(err => <Alert color='error'>{err.message} </Alert>);
+   };
    return (
       <Layout>
          <Container component='main' maxWidth='xs'>
@@ -73,46 +80,56 @@ export default function SignUp() {
                   Sign up
                </Typography>
                <form onSubmit={handleSubmit} className={classes.form} noValidate>
-                  <Grid container spacing={2}>
-                     <Grid item xs={12}>
-                        <TextField
-                           variant='outlined'
-                           required
-                           fullWidth
-                           id='email'
-                           label='Email Address'
-                           name='email'
-                           autoComplete='email'
+                  {errors && showErrors()}
+                  <FormGroup>
+                     <FormControl
+                        // className={classes.margin, classes.textField)}
+                        key='1'>
+                        <InputLabel htmlFor='email' required>
+                           Email Id
+                        </InputLabel>
+                        <Input
+                           required={true}
+                           id='standard-required'
+                           type='email'
+                           value={email}
                            onChange={e => handleChange("email", e.target.value)}
                         />
-                     </Grid>
-                     <Grid item xs={12}>
-                        <TextField
-                           variant='outlined'
-                           required
-                           fullWidth
+                     </FormControl>
+                     <FormControl key='23'>
+                        <InputLabel htmlFor='email' required>
+                           Password
+                        </InputLabel>
+                        <Input
+                           required={true}
                            name='password'
-                           label='Password'
                            type='password'
                            id='password'
-                           autoComplete='current-password'
+                           value={password}
                            onChange={e => handleChange("password", e.target.value)}
                         />
+                     </FormControl>
+
+                     <FormControlLabel
+                        control={<Checkbox value='remember' color='primary' />}
+                        label='Remember me'
+                     />
+                     <Button
+                        type='submit'
+                        fullWidth
+                        variant='contained'
+                        color='primary'
+                        className={classes.submit}>
+                        Sign Up
+                     </Button>
+                     <Grid container>
+                        <Grid item>
+                           <Link to='/signup' variant='body2'>
+                              {"Already have an account? Sign In"}
+                           </Link>
+                        </Grid>
                      </Grid>
-                  </Grid>
-                  <Button
-                     type='submit'
-                     fullWidth
-                     variant='contained'
-                     color='primary'
-                     className={classes.submit}>
-                     Sign Up
-                  </Button>
-                  <Grid container justify='flex-end'>
-                     <Grid item>
-                        <Link href='/'>Already have an account? Sign in</Link>
-                     </Grid>
-                  </Grid>
+                  </FormGroup>
                </form>
             </div>
          </Container>

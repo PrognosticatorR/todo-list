@@ -10,7 +10,6 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
       return (
          <Paper>
             <List>
-               {console.log(todos)}
                {todos.map((todo, i) => (
                   <React.Fragment key={keyGenerator.getKey()}>
                      <Todo

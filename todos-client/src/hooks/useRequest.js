@@ -13,7 +13,7 @@ const useRequest = ({ url, method, body, onSuccess }) => {
          }
          return response.data;
       } catch (err) {
-         setErrors(err);
+         setErrors(err.response.data);
       }
    };
    return { doRequest, errors: errors };

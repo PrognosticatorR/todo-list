@@ -37,10 +37,10 @@ exports.markCompleted = async (req, res) => {
    if (task.userId !== req.currentUser.id) {
       throw new NotAuthorizedError();
    }
-   status === "inprogress"
-      ? task.set({ status: StatusType.completed })
-      : task.set({ status: StatusType.inprogress });
+   let newStatus = status === "inprogress" ? StatusType.completed : StatusType.inprogress;
 
+   task.set({ status: newStatus });
+   task.subTasks.map(sub => (sub.status = newStatus));
    await task.save();
    res.status(200).send(task);
 };

@@ -4,20 +4,21 @@ import ListItemText from "@material-ui/core/ListItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import AddIcon from "@material-ui/icons/Add";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import SubTasks from "./SubTasks";
 
 import EditTodoForm from "./EditTodoForm";
 
-function Todo({ id, description, status, removeTodo, toggleTodo, editTodo, subTasks }) {
+function SubTask({ id, description, status, toggleTodo, editTodo, removeTodo }) {
    const [isEditing, toggle] = useState(false);
-   const [showSubtasks, setShowSubtasks] = useState(false);
-
+   console.log(id, description, status);
    return (
       <>
-         <ListItem style={{ height: "64px" }}>
+         <ListItem
+            style={{
+               height: "40px",
+               width: "90%",
+               marginLeft: "3rem",
+            }}>
             {isEditing ? (
                <EditTodoForm
                   editTodo={editTodo}
@@ -42,24 +43,12 @@ function Todo({ id, description, status, removeTodo, toggleTodo, editTodo, subTa
                      <IconButton aria-label='Delete' onClick={() => removeTodo(id)}>
                         <DeleteIcon />
                      </IconButton>
-                     <IconButton aria-label='Edit' onClick={toggle}>
-                        <EditIcon />
-                     </IconButton>
-
-                     <IconButton
-                        aria-label='Add SubTask'
-                        onClick={() => setShowSubtasks(!showSubtasks)}>
-                        <AddIcon />
-                     </IconButton>
                   </ListItemSecondaryAction>
                </>
             )}
          </ListItem>
-         {showSubtasks && (
-            <SubTasks taskId={id} subtasks={subTasks} show={showSubtasks} />
-         )}
       </>
    );
 }
 
-export default Todo;
+export default SubTask;

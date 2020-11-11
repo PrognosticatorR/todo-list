@@ -6,6 +6,7 @@ const {
    deletesubtask,
    update,
    toggaleStatus,
+   getAll,
 } = require("../controllers/subTask");
 const StatusTypes = require("../utils/enums");
 
@@ -54,5 +55,7 @@ router.patch(
    validateRequest,
    toggaleStatus
 );
+
+router.get("/:taskId", currentUser, validateRequest, getAll);
 
 module.exports = router;

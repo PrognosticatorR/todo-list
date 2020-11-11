@@ -17,7 +17,16 @@ exports.create = async (req, res) => {
    await newsubTask.save();
    task.subTasks.push(newsubTask);
    await task.save();
-   res.status(201).send(task);
+   res.status(201).send(newsubTask);
+};
+
+exports.getAll = async (req, res) => {
+   const { taskId } = req.params;
+   const task = await Task.findById(taskId).populate("subTasks");
+   if (!task) {
+      throw new NotFoundError();
+   }
+   res.status(200).send(task.subTasks);
 };
 
 exports.deletesubtask = async (req, res) => {
@@ -38,7 +47,6 @@ exports.update = async (req, res) => {
    const { description } = req.body;
    try {
       const subTask = await SubTask.findById(subtaskId);
-      console.log(subTask);
       if (!subTask || subTask.length === 0) {
          throw new NotFoundError();
       }

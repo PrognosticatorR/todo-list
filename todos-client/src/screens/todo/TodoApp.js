@@ -5,9 +5,32 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../../components/Layout";
 import { getAlltasks } from "../../actions/todos";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { addTask, deleteTask, updateTask, toggleStatus } from "../../actions/todos";
+import { Typography } from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles(theme => ({
+   paper: {
+      padding: 0,
+      margin: 0,
+      height: "100vh",
+      backgroundColor: "#fafafa",
+   },
+   avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+   },
+   header: {
+      color: theme.palette.primary.main,
+   },
+   submit: {
+      margin: theme.spacing(3, 0, 2),
+   },
+}));
 
 function TodoApp() {
+   const classes = useStyles();
    const [todolist, setTodolist] = useState([]);
    const [success, setSuccess] = useState(false);
    useEffect(() => {
@@ -30,16 +53,17 @@ function TodoApp() {
 
    return (
       <Layout>
-         <Paper
-            style={{
-               padding: 0,
-               margin: 0,
-               height: "100vh",
-               backgroundColor: "#fafafa",
-            }}
-            elevation={0}>
+         <CssBaseline />
+         <Paper className={classes.paper} elevation={1}>
             <Grid container justify='center' style={{ marginTop: "1rem" }}>
-               <Grid item xs={11} md={8} lg={4}>
+               <Grid item xs={11} md={8} lg={5}>
+                  <Typography
+                     className={classes.header}
+                     align='center'
+                     variant='h2'
+                     component='p'>
+                     Todo List
+                  </Typography>
                   <TodoForm addTodo={addTodo} />
                   <TodoList
                      todos={todolist}

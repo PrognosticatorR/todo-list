@@ -17,7 +17,12 @@ export const toggleSubTaskStatus = async (subtaskId, status) => {
    return res.data;
 };
 
-export const deleteSubTaskTask = async subtaskId => {
+export const deleteSubTask = async subtaskId => {
    let res = await Axios.delete(`/${subtaskId}`);
+   return res.data;
+};
+
+export const getSubTaks = async taskId => {
+   let res = await Axios.get(`/${taskId}`);
    return res.data;
 };
